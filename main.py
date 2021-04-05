@@ -25,7 +25,7 @@ def parse_cmdln():
     parser.add_argument('-pp', '--plotProperties', dest='plotArgs', 
                         help='Additional arguments for making CV plot')
     parser.add_argument('-o', '--output', dest='out',
-                        help='Name of I-V plot', default='CV_analysis')
+                        help='Name of I-V plot and integration output', default='CV_analysis')
     args = parser.parse_args()
     
     return args

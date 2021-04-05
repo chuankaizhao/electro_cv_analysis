@@ -44,7 +44,7 @@ def get_peak_and_integrate(data, peak, file):
         
         index, peak_volt, peak_curr = p[0], p[1], p[2]
         volt, curr = data[0], data[1]
-        file.write(f'Peak position: V{peak_volt:.4f}, C{peak_curr:.4f}\n')
+        file.write(f'Peak position: V {peak_volt:.4f}, C {peak_curr:.4f}\n')
 
         left_valid, left_index = find_left(curr, volt, index)
         right_valid, right_index = find_right(curr, volt, index)
