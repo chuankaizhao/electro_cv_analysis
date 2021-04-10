@@ -42,7 +42,7 @@ optional arguments:
   
   -o OUT, --output OUT  Name of I-V plot and integration output file
   
-<pre>
+</pre>
   
 ### Example 
   python main.py -i "0.1M KOH NO BA Processed Data.xlsx" -c D12 -v C12 -ps -pa -pp "legends : 0.1M KOH NO BA"
