@@ -10,6 +10,8 @@ peakutils
 
 ### Usage
 
+<pre>
+
 usage: python main.py [-h] -i INPUT -c [CURRENT [CURRENT ...]] -v
                [VOLTAGE [VOLTAGE ...]] [-ps] [-po] [-pa] [-pp PLOTARGS]
                [-o OUT]
@@ -39,6 +41,8 @@ optional arguments:
                         Additional arguments for making CV plot
   
   -o OUT, --output OUT  Name of I-V plot and integration output file
+  
+<pre>
   
 ### Example 
   python main.py -i "0.1M KOH NO BA Processed Data.xlsx" -c D12 -v C12 -ps -pa -pp "legends : 0.1M KOH NO BA"
