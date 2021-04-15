@@ -3,48 +3,30 @@ Visualize and analyze electrochemical current–voltage curve
 
 ### Dependencies
 The following dependencies are used, which can be installed via conda/pip:
-Numpy 
-Pandas
+<pre>
+numpy 
+pandas
 matplotlib
 peakutils
+</pre>
 
 ### Usage
 
 <pre>
 
-usage: python main.py [-h] -i INPUT -c [CURRENT [CURRENT ...]] -v
-               [VOLTAGE [VOLTAGE ...]] [-ps] [-po] [-pa] [-pp PLOTARGS]
-               [-o OUT]
+usage: python main.py
 
-optional arguments:
+optional arguments in inputfile.txt:
 
-  -h, --help            show this help message and exit
-  
-  -i INPUT, --input INPUT
-                        File containing I-V data.
-                        
-  -c [CURRENT [CURRENT ...]], --current [CURRENT [CURRENT ...]]
-                        Excel location where current data pop up: -i D12, F12
-                        
-  -v [VOLTAGE [VOLTAGE ...]], --voltage [VOLTAGE [VOLTAGE ...]]
-                        Excel location where voltage data pop up: -i C12, E12
-                       
-  -ps, --performSmooth  Smooth CV curve
-  
-  -po, --plotOriginal   Plot both original and smoothed CV curve when smooth
-                        method is used
-  
-  -pa, --performAnalysis
-                        Perform analysis for peaks in CV curve
-  
-  -pp PLOTARGS, --plotProperties PLOTARGS
-                        Additional arguments for making CV plot
-  
-  -o OUT, --output OUT  Name of I-V plot and integration output file
+input="0.1M KOH NO BA Processed Data.xlsx"      # input excel file name
+output="0.1M_KOH_NO_BA"                         # output file name
+current=['B12', 'H12']                          # current columns in excel
+current_area=['D12', 'J12']                     # current/area columns in excel
+voltage=['C12', 'I12']                          # voltage columns
+perform_smooth=true                             # perform curve smoothing 
+perform_analysis=true                           # perform peak and integration analysis
+plot_curve_compare=false                        # plot both original and smooth curve to compare smoothing effect
+plot_args_a={"xlim":[0.1, 0.5], "ylim":[-0.2, 0.7], "xlabel":"test1", "ylabel":"test2", "legends":["0.1M KOH NO BA", "0.2M KOH NO BA"]} \# Tuning CV curve normalized by a
+plot_args_q={"legends":["0.1M KOH NO BA", "0.2M KOH NO BA"]}          # Tuning CV curve normalized by q
   
 </pre>
-  
-### Example 
-  python main.py -i "0.1M KOH NO BA Processed Data.xlsx" -c D12 -v C12 -ps -pa -pp "legends : 0.1M KOH NO BA"
-  
-  
