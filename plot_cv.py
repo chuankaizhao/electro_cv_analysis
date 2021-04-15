@@ -17,10 +17,12 @@ def plot(plotArgs, data, ax, ls, plot_type, factor):
     cmap = mpl.cm.jet
     norm = mpl.colors.Normalize(vmin=0, vmax=1)
     
+    colors = ["#ff4c00", "#00d07c", "#ff9400", "#0772ca", ]
+    
     legends = plotArgs['legends'] if 'legends' in plotArgs else np.arange(len(data))
 
     for i, d in enumerate(data):
-        color   = cmap(i+1/len(data))
+        color   = cmap(i+1/len(data)) if len(data) > 4 else colors[i]
         if plot_type == 'area':
             ax.plot(d[0], d[1]/factor, lw=0.8, c=color, ls=ls, label=legends[i])
         else:
@@ -35,14 +37,18 @@ def plot_cv_normalized_by_area(args, inputData, smoothData, xlabel, ylabel):
     ylabel = plotArgs['ylabel'] if 'ylabel' in plotArgs else ylabel
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
+    if 'xlim' in plotArgs: ax.set_xlim(plotArgs['xlim'][0], plotArgs['xlim'][1])
+    if 'ylim' in plotArgs: ax.set_ylim(plotArgs['ylim'][0], plotArgs['ylim'][1])
 
-    if not args['perform_smooth'] or (args['perform_smooth'] and args['plot_curve_compare']):
-        print("Plotting CV curves based on original data")
+    if not args['perform_smooth']:
+        print("Plotting CV curves normalized by area based on original data")
         plot(plotArgs, inputData, ax, '-', "area", 1)
     
     if args['perform_smooth']:
-        print("Plotting CV curves based on moving averages of original data")
+        print("Plotting CV curves normalized by area based on moving averages of original data")
         plot(plotArgs, smoothData, ax, '-', "area", 1)
+        
+        if args['plot_curve_compare']: plot(plotArgs, inputData, ax, '--', "area", 1)
         
     ax.legend(loc=2, ncol=1, frameon=False, prop=fontP)
     plt.tight_layout()
@@ -57,14 +63,18 @@ def plot_cv_normalized_by_q(args, inputData, smoothData, xlabel, ylabel, factor)
     ylabel = plotArgs['ylabel'] if 'ylabel' in plotArgs else ylabel
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
+    if 'xlim' in plotArgs: ax.set_xlim(plotArgs['xlim'][0], plotArgs['xlim'][1])
+    if 'ylim' in plotArgs: ax.set_ylim(plotArgs['ylim'][0], plotArgs['ylim'][1])
 
-    if not args['perform_smooth'] or (args['perform_smooth'] and args['plot_curve_compare']):
-        print("Plotting CV curves based on original data")
+    if not args['perform_smooth']:
+        print("Plotting CV curves normalized by q based on original data")
         plot(plotArgs, inputData, ax, '-', "q", factor)
     
     if args['perform_smooth']:
-        print("Plotting CV curves based on moving averages of original data")
+        print("Plotting CV curves normalized by q based on moving averages of original data")
         plot(plotArgs, smoothData, ax, '-', "q", factor)
+        
+        if args['plot_curve_compare']: plot(plotArgs, inputData, ax, '--', "area", 1)
         
     ax.legend(loc=2, ncol=1, frameon=False, prop=fontP)
     plt.tight_layout()

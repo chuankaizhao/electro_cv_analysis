@@ -39,8 +39,8 @@ def parse_input(args):
         
         if i == 0:
             xlabel = list(df.loc[volt_row-1, [volt_col]])[0]
-            ylabel_a = list(df.loc[curr_row-1, [curr_col]])[0]
-            ylabel_q = list(df.loc[curr_area_row-1, [curr_area_col]])[0]
+            ylabel_q = list(df.loc[curr_row-1, [curr_col]])[0]
+            ylabel_a = list(df.loc[curr_area_row-1, [curr_area_col]])[0]
         
         if args['perform_smooth']:
             curr_row, curr_col, curr_data = parse_smooth_data(df, curr)

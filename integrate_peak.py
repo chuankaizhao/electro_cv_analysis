@@ -68,10 +68,13 @@ def integration(args, inputData):
         file.write(f'Experiment {i}:\n')
         file.write(f'============================================\n')
         valid_peak_info = get_peak_and_integrate(data, peaks[i], file)
+        file.write(f'********Summary********\n')
         if len(valid_peak_info) == 2:
             print(f'Summary: awesome, found two valid peaks ...')
-            file.write(f'********Summary********\n')
-            file.write(f'The average V between two peaks: {(valid_peak_info[0][0]+valid_peak_info[1][0])/2:.4f}')
+            file.write(f'The average V between two peaks: {(valid_peak_info[0][0]+valid_peak_info[1][0])/2:.4f}\n')
+        else:
+            file.write(f'The average V between two peaks: :(, not exactly two peaks are found\n')
     file.close()
-    print(f"Peak and integration analysis done! Check the output file: {args['output'] + '.png'} and {args['output'] + '.txt'}\n")
+    print(f"Peak and integration analysis done!")
+    print(f"Check the output file: {args['output'] + '.png'} and {args['output'] + '.txt'}")
     return valid_peak_info
