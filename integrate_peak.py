@@ -9,9 +9,9 @@ def get_peaks(inputData):
     peaks = []
     for data in inputData:
         peak = []
-        indexes = peakutils.indexes(np.abs(data[1]), min_dist=20)
+        indexes = peakutils.indexes(np.abs(data[2]), min_dist=20)
         for index in indexes:
-            peak.append([index, data[0][index], data[1][index]])
+            peak.append([index, data[0][index], data[1][index], data[2][index]])
         peaks.append(peak)
     return peaks
 
@@ -37,23 +37,30 @@ def find_right(curr, volt, index):
             index += 1
         return (True, index) if index < len(curr) else (False, index)
 
+def check_integration(expr_id, file, valid_peak_info):
+    diff = abs(valid_peak_info[0][2] - valid_peak_info[1][2])/valid_peak_info[0][2]
+    if diff > 0.05: 
+        file.write(f"Are integration nearly equal for two peaks in experiment {expr_id}: No, you should CHECK the peaks!")
+    else:
+        file.write(f"Are integration nearly equal for two peaks in experiment {expr_id}: Yes, looks good!")
+    
 def get_peak_and_integrate(data, peak, file):
     valid_peak_info = []
     for i, p in enumerate(peak):
         print(f'Processing peak {i+1}:')
         file.write(f'Processing peak {i+1}:\n')
         
-        index, peak_volt, peak_curr = p[0], p[1], p[2]
-        volt, curr = data[0], data[1]
-        file.write(f'Peak position: V {peak_volt:.4f}, C {peak_curr:.4f}\n')
+        index, peak_volt, peak_curr_area, peak_curr = p[0], p[1], p[2], p[3]
+        volt, curr_area, curr = data[0], data[1], data[2] 
+        file.write(f'Peak position: V {peak_volt:.4f}, C/area {peak_curr_area:.4f}, C {peak_curr:.4f}\n')
 
-        left_valid, left_index = find_left(curr, volt, index)
-        right_valid, right_index = find_right(curr, volt, index)
+        left_valid, left_index = find_left(curr_area, volt, index)
+        right_valid, right_index = find_right(curr_area, volt, index)
         if left_valid and right_valid:
             print("Peak valid, computing integration ...")
             q = np.trapz(curr[left_index:right_index], x=volt[left_index:right_index])
             file.write(f'Integration results: {q:.6f}, computed over volatge between {min(volt[left_index], volt[right_index]):.4f} and {max(volt[left_index], volt[right_index]):.4f})\n')
-            valid_peak_info.append([peak_volt, peak_curr, q])
+            valid_peak_info.append([peak_volt, peak_curr_area, peak_curr, q])
         else:
             print("Peak invalid, continue ...")
             file.write(f'Integration results: invalid peak!\n')
@@ -62,19 +69,21 @@ def get_peak_and_integrate(data, peak, file):
 def integration(args, inputData):
     print("Performing peak and integration analysis ...")
     peaks = get_peaks(inputData)
+    valid_peak_infos = []
     file  = open(args['output'] + '_analysis.txt', 'w')
     for i, data in enumerate(inputData):
-        print(f"Starting from CV curve {i+1}")
-        file.write(f'Experiment {i}:\n')
+        file.write(f'Experiment {i+1}:\n')
         file.write(f'============================================\n')
         valid_peak_info = get_peak_and_integrate(data, peaks[i], file)
+        valid_peak_infos.append(valid_peak_info)
         file.write(f'********Summary********\n')
         if len(valid_peak_info) == 2:
             print(f'Summary: awesome, found two valid peaks ...')
             file.write(f'The average V between two peaks: {(valid_peak_info[0][0]+valid_peak_info[1][0])/2:.4f}\n')
+            check_integration(i+1, file, valid_peak_info)
         else:
             file.write(f'The average V between two peaks: :(, not exactly two peaks are found\n')
     file.close()
     print(f"Peak and integration analysis done!")
     print(f"Check the output file: {args['output'] + '.png'} and {args['output'] + '.txt'}")
-    return valid_peak_info
+    return valid_peak_infos
