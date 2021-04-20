@@ -2,10 +2,11 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import math
 import numpy as np
+import matplotlib.ticker as plticker
 
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
-rcParams['font.sans-serif'] = ['Tahoma']
+rcParams['font.sans-serif'] = ['helvetica']
 params = {'mathtext.default': 'regular', 'xtick.direction':'out', 'ytick.direction':'out' }
 plt.rcParams.update(params)
 
@@ -65,6 +66,8 @@ def plot_cv_normalized_by_area(args, inputData, smoothData, xlabel, ylabel):
     ax.set_ylabel(ylabel)
     if 'xlim' in plotArgs: ax.set_xlim(plotArgs['xlim'][0], plotArgs['xlim'][1])
     if 'ylim' in plotArgs: ax.set_ylim(plotArgs['ylim'][0], plotArgs['ylim'][1])
+    loc = plticker.MultipleLocator(base=0.1) # this locator puts ticks at regular intervals
+    ax.xaxis.set_major_locator(loc)
 
     if not args['perform_smooth']:
         print("Plotting CV curves normalized by area based on original data")
@@ -91,6 +94,8 @@ def plot_cv_normalized_by_q(args, inputData, smoothData, xlabel, ylabel, valid_p
     ax.set_ylabel(ylabel)
     if 'xlim' in plotArgs: ax.set_xlim(plotArgs['xlim'][0], plotArgs['xlim'][1])
     if 'ylim' in plotArgs: ax.set_ylim(plotArgs['ylim'][0], plotArgs['ylim'][1])
+    loc = plticker.MultipleLocator(base=0.1) # this locator puts ticks at regular intervals
+    ax.xaxis.set_major_locator(loc)
     if args["share_q"]: valid_peak_infos[1::2] = valid_peak_infos[::2]
 
     if not args['perform_smooth']:
