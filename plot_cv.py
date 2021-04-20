@@ -7,6 +7,7 @@ import matplotlib.ticker as plticker
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
 rcParams['font.sans-serif'] = ['helvetica']
+rcParams['font.size'] = '10'
 params = {'mathtext.default': 'regular', 'xtick.direction':'out', 'ytick.direction':'out' }
 plt.rcParams.update(params)
 
@@ -20,7 +21,7 @@ norm = mpl.colors.Normalize(vmin=0, vmax=1)
 def get_color(plotArgs, i, l):
     colors = ["#ff4c00", "#00d07c", "#ff9400", "#0772ca", ]
     if 'colors' in plotArgs:
-        color = cmap(plotArgs['colors'][i]/len(set(plotArgs['colors']))) if l > 4 else colors[plotArgs['colors'][i]]
+        color = cmap(plotArgs['colors'][i]/len(set(plotArgs['colors']))) if len(set(plotArgs['colors'])) > 4 else colors[plotArgs['colors'][i]]
     else:
         color = cmap((i+1)/l) if l > 4 else colors[i]
     return color
