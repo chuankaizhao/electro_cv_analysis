@@ -1,16 +1,21 @@
-input="0.1M KOH NO BA Processed Data.xlsx"     # input excel file name
-output="0.1M_KOH_NO_BA"                        # output file name
-current=['B12', 'H12']                         # current columns in excel
-current_area=['D12', 'J12']                    # current/area columns in excel
-voltage=['C12', 'I12']                         # voltage columns
-perform_smooth=true                            # perform curve smoothing 
+input="Input_Data/0.1M NaOH 0.45M Na2SO4 with(out) BA Processed Data.xlsx"     # input excel file name
+output="0.1M NaOH 0.45M Na2SO4 with(out) BA"                        # output file name
+
+current=['B12', 'H12', 'N12', 'T12', 'Z12', 'AF12']                         # current columns in excel
+current_area=['D12', 'J12', 'P12', 'V12', 'AB12', 'AH12']                    # current/area columns in excel
+voltage=['C12', 'I12', 'O12', 'U12', 'AA12', 'AG12']                         # voltage columns
+perform_smooth=false                            # perform curve smoothing 
 perform_analysis=true                          # perform peak and integration analysis
 plot_curve_compare=false                       # plot both original and smooth curve to compare smoothing effect
+
 # Addtional tuning of plot_args
 # {"xlim":[0.1, 0.5], "ylim":[-0.2, 0.7], "xlabel":"test1", "ylabel":"test2", "legends":["0.1M KOH NO BA", "0.2M KOH NO BA"]}
 # CV curve normalized by area
-plot_args_a={"xlabel":"E - iRu (V vs RHE)", "legends":["cycle 1", "cycle 2"]}  
+plot_args_a={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", "-", "--"], "colors":[1,1,2,2,3,3], "legends":["Run 1 NO BA", "Run 1 50mM BA", "Run 2 NO BA", "Run 2 50mM BA","Run 3 NO BA", "Run 3 50mM BA"]}  
+
 # CV curve normalized by q
-plot_args_q={"xlabel":"E - iRu (V vs RHE)", "legends":["cycle 1", "cycle 2"]}      
+plot_args_q={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", "-", "--"], "colors":[1,1,2,2,3,3], "legends":["Run 1 NO BA", "Run 1 50mM BA", "Run 2 NO BA", "Run 2 50mM BA","Run 3 NO BA", "Run 3 50mM BA"]}      
+
 # System specific parameters
 molecular_weight=58.6934                       # molecular weight of catalyst: unit g/mol
+share_q=true                                   # copy the peak integration from voltage[0::2] to [1::2]

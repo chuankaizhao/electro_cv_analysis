@@ -14,7 +14,6 @@ def parse_cmdln(inputFile):
                     continue
                 line = line.split('#')[0]
                 key, value = line.strip().split('=')
-                print(key, value)
                 if value[0] == '[' and value[-1] == ']':
                     value = parse_list(value)
                 else:

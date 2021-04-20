@@ -30,7 +30,8 @@ def cv_analysis(args):
     print("####                          Plot CV curves                          ####")
     
     plot_cv.plot_cv_normalized_by_area(args, inputData, smoothData, xlabel, ylabel_a)
-    plot_cv.plot_cv_normalized_by_q(args, inputData, smoothData, xlabel, ylabel_q, valid_peak_infos)
+    if args['perform_analysis']:
+        plot_cv.plot_cv_normalized_by_q(args, inputData, smoothData, xlabel, ylabel_q, valid_peak_infos)
     
     print("\n")
     

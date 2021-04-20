@@ -12,7 +12,7 @@ def parse_key(location):
     if len(col) == 1:
         col = ord(col[0].upper()) - ord('A')
     else:
-        col = (ord(col[0].upper()) - ord('A') + 1) * 26 + ord(col[1].upper()) - ord('A')    
+        col = (ord(col[0].upper()) - ord('A') + 1) * 26 + ord(col[1].upper()) - ord('A')   
     return int(row), col
 
 def parse_data(df, location):

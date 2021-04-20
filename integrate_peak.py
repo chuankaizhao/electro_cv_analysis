@@ -9,7 +9,7 @@ def get_peaks(inputData):
     peaks = []
     for data in inputData:
         peak = []
-        indexes = peakutils.indexes(np.abs(data[2]), min_dist=20)
+        indexes = peakutils.indexes(np.abs(data[2]), thres=0.1, min_dist=5)
         for index in indexes:
             peak.append([index, data[0][index], data[1][index], data[2][index]])
         peaks.append(peak)
