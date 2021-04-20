@@ -2,7 +2,7 @@ import pandas as pd
 import numpy  as np
 import re
 
-MOVING_WINDOW_SIZE = 3
+MOVING_WINDOW_SIZE = 10
 
 regex = re.compile(r'(\d+|\s+)')
 
@@ -17,13 +17,11 @@ def parse_key(location):
 
 def parse_data(df, location):
     row, col = parse_key(location)
-    print(row, col)
     data = df.loc[row:, [col]].to_numpy().transpose()[0]
     return row, col, data
 
 def parse_smooth_data(df, location):
     row, col = parse_key(location)
-    print(row, col)
     data = df.loc[row:, [col]].rolling(MOVING_WINDOW_SIZE, min_periods=1, 
                                                               center=True).mean().to_numpy().transpose()[0]
     return row, col, data
