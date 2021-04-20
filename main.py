@@ -3,5 +3,4 @@ import run
 
 if __name__ == '__main__':
     args = parse_cmdln.parse_cmdln("inputfile.txt")
-    print(args)
     run.cv_analysis(args)
