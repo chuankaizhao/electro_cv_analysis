@@ -30,9 +30,6 @@ def get_catalyst_weight(q, molecular_weight):
     return (q / 96.485) * molecular_weight   ## unit is ug
 
 def plot_a(plotArgs, data, ax, ls):
-    cmap = mpl.cm.jet
-    norm = mpl.colors.Normalize(vmin=0, vmax=1)
-    
     legends = plotArgs['legends'] if 'legends' in plotArgs else np.arange(len(data))
 
     for i, d in enumerate(data):
@@ -41,9 +38,6 @@ def plot_a(plotArgs, data, ax, ls):
         ax.plot(d[0], d[1], lw=0.8, c=color, ls=ls, label=legends[i])
 
 def plot_q(plotArgs, data, ax, ls, valid_peak_infos, molecular_weight):
-    cmap = mpl.cm.jet
-    norm = mpl.colors.Normalize(vmin=0, vmax=1)
-    
     legends = plotArgs['legends'] if 'legends' in plotArgs else np.arange(len(data))
     
     for i, d in enumerate(data):
