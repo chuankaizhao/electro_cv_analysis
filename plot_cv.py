@@ -6,14 +6,14 @@ import matplotlib.ticker as plticker
 
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
-rcParams['font.sans-serif'] = 'Helvetica'
-rcParams['font.size'] = '10'
+rcParams['font.sans-serif'] = 'Arial'
+rcParams['font.size'] = '16'
 params = {'mathtext.default': 'regular', 'xtick.direction':'out', 'ytick.direction':'out' }
 plt.rcParams.update(params)
 
 from matplotlib.font_manager import FontProperties
 fontP = FontProperties()
-fontP.set_size('6')
+fontP.set_size('8')
 
 cmap = mpl.cm.jet
 norm = mpl.colors.Normalize(vmin=0, vmax=1)
@@ -51,7 +51,8 @@ def plot_q(plotArgs, data, ax, ls, valid_peak_infos, molecular_weight):
             print("skipping plot current/q because number of valid peaks is not equal to 2 ...")
 
 def plot_cv_normalized_by_area(args, inputData, smoothData, xlabel, ylabel):
-    ax  = plt.subplot2grid((2,2),(0,0))
+    fig = plt.figure()
+    ax = fig.add_subplot(111,aspect='auto')
     
     plotArgs = args['plot_args_a']
         
@@ -79,7 +80,8 @@ def plot_cv_normalized_by_area(args, inputData, smoothData, xlabel, ylabel):
     plt.savefig(args['output'] + '_a.png', dpi=500, bbox_inches='tight')
 
 def plot_cv_normalized_by_q(args, inputData, smoothData, xlabel, ylabel, valid_peak_infos):
-    ax  = plt.subplot2grid((2,2),(0,0))
+    fig = plt.figure()
+    ax = fig.add_subplot(111,aspect='auto')
     
     plotArgs = args['plot_args_q']
         
