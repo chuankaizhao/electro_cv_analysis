@@ -17,5 +17,6 @@ plot_args_a={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", 
 plot_args_q={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", "-", "--"], "colors":[1,1,2,2,3,3], "legends":["Run 1 NO BA", "Run 1 50mM BA", "Run 2 NO BA", "Run 2 50mM BA","Run 3 NO BA", "Run 3 50mM BA"]}      
 
 # System specific parameters
-molecular_weight=58.6934                       # molecular weight of catalyst: unit g/mol
-share_q=true                                   # copy the peak integration from voltage[0::2] to [1::2]
+molecular_weight=58.6934                 # molecular weight of catalyst: unit g/mol
+share_q=true                             # copy the peak integration from voltage[0::2] to [1::2]
+ignore_addtional_peaks=true              # when more than two peaks identified, choose the two peaks with the widest range of volatge

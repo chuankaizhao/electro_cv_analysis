@@ -6,7 +6,7 @@ import matplotlib.ticker as plticker
 
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
-rcParams['font.sans-serif'] = ['helvetica']
+rcParams['font.sans-serif'] = 'Helvetica'
 rcParams['font.size'] = '10'
 params = {'mathtext.default': 'regular', 'xtick.direction':'out', 'ytick.direction':'out' }
 plt.rcParams.update(params)
