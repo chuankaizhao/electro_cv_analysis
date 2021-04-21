@@ -11,10 +11,10 @@ plot_curve_compare=false                       # plot both original and smooth c
 # Addtional tuning of plot_args
 # {"xlim":[0.1, 0.5], "ylim":[-0.2, 0.7], "xlabel":"test1", "ylabel":"test2", "legends":["0.1M KOH NO BA", "0.2M KOH NO BA"]}
 # CV curve normalized by area
-plot_args_a={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", "-", "--", "-", "--"], "colors":[0,0,1,1,2,2,3,3], "legends":["1M KOH no BA", "1M KOH 50mM BA", "1M NaOH NO BA_S", "1M NaOH 50mM BA_S", "0.1M KOH 0.45M K2SO4 no BA", "0.1M KOH 0.45M K2SO4 50mM BA", "0.1M NaOH 0.45M Na2SO4 NO BA", "0.1M NaOH 0.45M Na2SO4 50mM BA"]}  
+plot_args_a={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", "-", "--", "-", "--"], "colors":[0,0,1,1,2,2,3,3], "legends":["1M KOH no BA", "1M KOH 50mM BA", "1M NaOH NO BA_S", "1M NaOH 50mM BA_S", "0.1M KOH 0.45M K$_{2}$SO$_{4}$ no BA", "0.1M KOH 0.45M K$_{2}$SO$_{4}$ 50mM BA", "0.1M NaOH 0.45M Na$_{2}$SO$_{4}$ NO BA", "0.1M NaOH 0.45M Na$_{2}$SO$_{4}$ 50mM BA"]}  
 
 # CV curve normalized by q
-plot_args_q={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", "-", "--", "-", "--"], "colors":[0,0,1,1,2,2,3,3], "legends":["1M KOH no BA", "1M KOH 50mM BA", "1M NaOH NO BA_S", "1M NaOH 50mM BA_S", "0.1M KOH 0.45M K2SO4 no BA", "0.1M KOH 0.45M K2SO4 50mM BA", "0.1M NaOH 0.45M Na2SO4 NO BA", "0.1M NaOH 0.45M Na2SO4 50mM BA"]}      
+plot_args_q={"xlabel":"E - iRu (V vs RHE)", "linestyles":["-", "--", "-", "--", "-", "--", "-", "--"], "colors":[0,0,1,1,2,2,3,3], "legends":["1M KOH no BA", "1M KOH 50mM BA", "1M NaOH NO BA_S", "1M NaOH 50mM BA_S", "0.1M KOH 0.45M K$_{2}$SO$_{4}$ no BA", "0.1M KOH 0.45M K$_{2}$SO$_{4}$ 50mM BA", "0.1M NaOH 0.45M Na$_{2}$SO$_{4}$ NO BA", "0.1M NaOH 0.45M Na$_{2}$SO$_{4}$ 50mM BA"]}      
 
 # System specific parameters
 molecular_weight=58.6934                       # molecular weight of catalyst: unit g/mol
