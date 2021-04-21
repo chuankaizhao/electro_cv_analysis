@@ -6,14 +6,14 @@ import matplotlib.ticker as plticker
 
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
-rcParams['font.sans-serif'] = 'Helvetica'
-rcParams['font.size'] = '10'
+rcParams['font.sans-serif'] = 'Arial'
+rcParams['font.size'] = '16'
 params = {'mathtext.default': 'regular', 'xtick.direction':'out', 'ytick.direction':'out' }
 plt.rcParams.update(params)
 
 from matplotlib.font_manager import FontProperties
 fontP = FontProperties()
-fontP.set_size('6')
+fontP.set_size('8')
 
 cmap = mpl.cm.jet
 norm = mpl.colors.Normalize(vmin=0, vmax=1)
@@ -34,7 +34,7 @@ def plot_a(plotArgs, data, ax, ls):
 
     for i, d in enumerate(data):
         color   = get_color(plotArgs, i, len(data))
-        if "linestyles" in plotArgs: ls = plotArgs["linestyles"][i]
+        if "linestyles" in plotArgs and ls != '-.': ls = plotArgs["linestyles"][i]
         ax.plot(d[0], d[1], lw=0.8, c=color, ls=ls, label=legends[i])
 
 def plot_q(plotArgs, data, ax, ls, valid_peak_infos, molecular_weight):
@@ -43,7 +43,7 @@ def plot_q(plotArgs, data, ax, ls, valid_peak_infos, molecular_weight):
     for i, d in enumerate(data):
         valid_peak_info = valid_peak_infos[i]
         color   = get_color(plotArgs, i, len(data))
-        if "linestyles" in plotArgs: ls = plotArgs["linestyles"][i]
+        if "linestyles" in plotArgs and ls != '-.': ls = plotArgs["linestyles"][i]
         if len(valid_peak_info) == 2:
             mean_integration = (valid_peak_info[0][3] + valid_peak_info[1][3]) / 2
             ax.plot(d[0], d[2]/get_catalyst_weight(mean_integration, molecular_weight), lw=0.8, c=color, ls=ls, label=legends[i])
@@ -51,7 +51,8 @@ def plot_q(plotArgs, data, ax, ls, valid_peak_infos, molecular_weight):
             print("skipping plot current/q because number of valid peaks is not equal to 2 ...")
 
 def plot_cv_normalized_by_area(args, inputData, smoothData, xlabel, ylabel):
-    ax  = plt.subplot2grid((2,2),(0,0))
+    fig = plt.figure()
+    ax = fig.add_subplot(111,aspect='auto')
     
     plotArgs = args['plot_args_a']
         
@@ -72,14 +73,15 @@ def plot_cv_normalized_by_area(args, inputData, smoothData, xlabel, ylabel):
         print("Plotting CV curves normalized by area based on moving averages of original data")
         plot_a(plotArgs, smoothData, ax, '-')
         
-        if args['plot_curve_compare']: plot_a(plotArgs, inputData, ax, '--')
+        if args['plot_curve_compare']: plot_a(plotArgs, inputData, ax, '-.')
         
     ax.legend(loc=2, ncol=1, frameon=False, prop=fontP)
     plt.tight_layout()
     plt.savefig(args['output'] + '_a.png', dpi=500, bbox_inches='tight')
 
 def plot_cv_normalized_by_q(args, inputData, smoothData, xlabel, ylabel, valid_peak_infos):
-    ax  = plt.subplot2grid((2,2),(0,0))
+    fig = plt.figure()
+    ax = fig.add_subplot(111,aspect='auto')
     
     plotArgs = args['plot_args_q']
         
@@ -101,7 +103,7 @@ def plot_cv_normalized_by_q(args, inputData, smoothData, xlabel, ylabel, valid_p
         print("Plotting CV curves normalized by q based on moving averages of original data")
         plot_q(plotArgs, smoothData, ax, '-', valid_peak_infos, args['molecular_weight'])
         
-        if args['plot_curve_compare']: plot_q(plotArgs, inputData, ax, '--', valid_peak_infos, args['molecular_weight'])
+        if args['plot_curve_compare']: plot_q(plotArgs, inputData, ax, '-.', valid_peak_infos, args['molecular_weight'])
         
     ax.legend(loc=2, ncol=1, frameon=False, prop=fontP)
     plt.tight_layout()
